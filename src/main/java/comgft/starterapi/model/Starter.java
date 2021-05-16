@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Starter --- represents a starter for the project Start.
+ * Starter --- represents a starter in the project Start.
  * @author    Diego da Silva Lourenco
  */
 

@@ -17,40 +17,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import comgft.starterapi.model.Starter;
-import comgft.starterapi.service.StarterService;
+import comgft.starterapi.model.Desafio;
+import comgft.starterapi.service.DesafioService;
 
 @RestController
-@RequestMapping("/starters")
-public class StarterResources {
+@RequestMapping("/desafios")
+public class DesafioResources {
 	
 	@Autowired
-	StarterService starterService;
+	DesafioService desafioService;
 	
 	@GetMapping
-	public ResponseEntity<List<Starter>> getAll() {
-		return new ResponseEntity<List<Starter>>(starterService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Desafio>> getAll() {
+		return new ResponseEntity<List<Desafio>>(desafioService.getAll(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Starter> getById(@PathVariable Long id) {
-		return new ResponseEntity<Starter>(starterService.getById(id), HttpStatus.OK);
+	public ResponseEntity<Desafio> getById(@PathVariable Long id) {
+		return new ResponseEntity<Desafio>(desafioService.getById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Starter> create(@Valid @RequestBody Starter starter, HttpServletResponse response) {
-		return new ResponseEntity<Starter>(starterService.save(starter, response), HttpStatus.CREATED);
+	public ResponseEntity<Desafio> create(@Valid @RequestBody Desafio desafio, HttpServletResponse response) {
+		return new ResponseEntity<Desafio>(desafioService.save(desafio, response), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		starterService.delete(id);
+		desafioService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Starter> update(@PathVariable Long id, @Valid @RequestBody Starter starter) {			
-		return new ResponseEntity<Starter>(starterService.update(id, starter), HttpStatus.OK);
+	public ResponseEntity<Desafio> update(@PathVariable Long id, @Valid @RequestBody Desafio desafio) {			
+		return new ResponseEntity<Desafio>(desafioService.update(id, desafio), HttpStatus.OK);
 	}
-	
+
 }

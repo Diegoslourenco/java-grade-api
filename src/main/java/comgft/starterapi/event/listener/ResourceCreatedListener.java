@@ -26,4 +26,5 @@ public class ResourceCreatedListener implements ApplicationListener<ResourceCrea
 				.buildAndExpand(id).toUri();
 		response.setHeader("Location", uri.toASCIIString());
 	}
+	
 }
