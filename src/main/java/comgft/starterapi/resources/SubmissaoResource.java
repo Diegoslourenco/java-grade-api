@@ -17,40 +17,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import comgft.starterapi.model.Starter;
-import comgft.starterapi.service.StarterService;
+import comgft.starterapi.model.Submissao;
+import comgft.starterapi.service.SubmissaoService;
 
 @RestController
-@RequestMapping("/starters")
-public class StarterResources {
+@RequestMapping("/submissoes")
+public class SubmissaoResource {
 	
 	@Autowired
-	private StarterService starterService;
+	private SubmissaoService submissaoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Starter>> getAll() {
-		return new ResponseEntity<List<Starter>>(starterService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Submissao>> getAll() {
+		return new ResponseEntity<List<Submissao>>(submissaoService.getAll(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Starter> getById(@PathVariable Long id) {
-		return new ResponseEntity<Starter>(starterService.getById(id), HttpStatus.OK);
+	public ResponseEntity<Submissao> getById(@PathVariable Long id) {
+		return new ResponseEntity<Submissao>(submissaoService.getById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Starter> create(@Valid @RequestBody Starter starter, HttpServletResponse response) {
-		return new ResponseEntity<Starter>(starterService.save(starter, response), HttpStatus.CREATED);
+	public ResponseEntity<Submissao> create(@Valid @RequestBody Submissao submissao, HttpServletResponse response) {
+		return new ResponseEntity<Submissao>(submissaoService.save(submissao, response), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		starterService.delete(id);
+		submissaoService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Starter> update(@PathVariable Long id, @Valid @RequestBody Starter starter) {			
-		return new ResponseEntity<Starter>(starterService.update(id, starter), HttpStatus.OK);
+	public ResponseEntity<Submissao> update(@PathVariable Long id, @Valid @RequestBody Submissao submissao) {			
+		return new ResponseEntity<Submissao>(submissaoService.update(id, submissao), HttpStatus.OK);
 	}
 	
 }

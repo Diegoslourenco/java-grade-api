@@ -24,7 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/starters",
 						"/starters/*",
 						"/desafios",
-						"/desafios/*").permitAll()
+						"/desafios/*",
+						"/submissoes",
+						"/submissoes/*").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.httpBasic().and()
