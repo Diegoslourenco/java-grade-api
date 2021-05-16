@@ -19,8 +19,9 @@ import comgft.starterapi.repository.StarterRepository;
 public class StarterService {
 	
 	@Autowired
-	StarterRepository starters;
+	private StarterRepository starters;
 	
+	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	public List<Starter> getAll() {
@@ -62,6 +63,5 @@ public class StarterService {
 		
 		return starters.save(starterSaved);
 	}
-
 
 }

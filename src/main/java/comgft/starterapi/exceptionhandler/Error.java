@@ -22,4 +22,5 @@ public class Error {
 	public String getMessageDeveloper() {
 		return messageDeveloper;
 	}	
+	
 }
