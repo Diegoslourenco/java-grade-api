@@ -12,6 +12,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import comgft.starterapi.event.ResourceCreatedEvent;
+import comgft.starterapi.exceptionhandler.StarterEmailNotUniqueException;
+import comgft.starterapi.exceptionhandler.StarterUsernameNotUniqueException;
 import comgft.starterapi.model.Starter;
 import comgft.starterapi.repository.StarterRepository;
 
@@ -41,6 +43,14 @@ public class StarterService {
 
 	public Starter save(Starter starter, HttpServletResponse response) {
 		
+		if (checkUniqueUsername(starter)) {
+			throw new StarterUsernameNotUniqueException();
+		}
+		
+		if (checkUniqueEmail(starter)) {
+			throw new StarterEmailNotUniqueException();
+		}
+			
 		Starter starterSaved = starters.save(starter);
 		
 		publisher.publishEvent(new ResourceCreatedEvent(this, response, starterSaved.getId()));
@@ -62,6 +72,32 @@ public class StarterService {
 		BeanUtils.copyProperties(starter, starterSaved, "id");
 		
 		return starters.save(starterSaved);
+	}
+	
+	public boolean checkUniqueEmail(Starter novoStarter) {
+		List<Starter> allStarters = starters.findAll();
+		
+		for (Starter starter : allStarters) {
+			
+			if (starter.getEmail().equals(novoStarter.getEmail())) {
+				return true;
+			}	
+		}
+		
+		return false;	
+	}
+	
+	public boolean checkUniqueUsername(Starter novoStarter) {
+		List<Starter> allStarters = starters.findAll();
+		
+		for (Starter starter : allStarters) {
+			
+			if (starter.getUsername().equals(novoStarter.getUsername())) {
+				return true;
+			}	
+		}
+		
+		return false;	
 	}
 
 }
