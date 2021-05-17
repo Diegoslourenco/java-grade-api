@@ -43,11 +43,11 @@ public class StarterService {
 
 	public Starter save(Starter starter, HttpServletResponse response) {
 		
-		if (checkUniqueUsername(starter)) {
+		if (!checkUniqueUsername(starter)) {
 			throw new StarterUsernameNotUniqueException();
 		}
 		
-		if (checkUniqueEmail(starter)) {
+		if (!checkUniqueEmail(starter)) {
 			throw new StarterEmailNotUniqueException();
 		}
 			
@@ -80,11 +80,11 @@ public class StarterService {
 		for (Starter starter : allStarters) {
 			
 			if (starter.getEmail().equals(novoStarter.getEmail())) {
-				return true;
+				return false;
 			}	
 		}
 		
-		return false;	
+		return true;	
 	}
 	
 	public boolean checkUniqueUsername(Starter novoStarter) {
@@ -93,11 +93,11 @@ public class StarterService {
 		for (Starter starter : allStarters) {
 			
 			if (starter.getUsername().equals(novoStarter.getUsername())) {
-				return true;
+				return false;
 			}	
 		}
 		
-		return false;	
+		return true;	
 	}
 
 }

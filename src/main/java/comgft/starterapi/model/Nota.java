@@ -2,6 +2,8 @@ package comgft.starterapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +32,13 @@ public class Nota {
 	
 	@NotNull
 	@Column(name = "grade_code_quality")
-	private int gradeCodeQuality;
+	@Enumerated(EnumType.ORDINAL)
+	private NotaValues gradeCodeQuality;
 	
 	@NotNull
 	@Column(name = "grade_quantity_delivered")
-	private int gradeQuantityDelivered;
+	@Enumerated(EnumType.ORDINAL)
+	private NotaValues gradeQuantityDelivered;
 
 	public Long getId() {
 		return id;
@@ -52,19 +56,19 @@ public class Nota {
 		this.submissao = submissao;
 	}
 
-	public int getGradeCodeQuality() {
+	public NotaValues getGradeCodeQuality() {
 		return gradeCodeQuality;
 	}
 
-	public void setGradeCodeQuality(int gradeCodeQuality) {
+	public void setGradeCodeQuality(NotaValues gradeCodeQuality) {
 		this.gradeCodeQuality = gradeCodeQuality;
 	}
 
-	public int getGradeQuantityDelivered() {
+	public NotaValues getGradeQuantityDelivered() {
 		return gradeQuantityDelivered;
 	}
 
-	public void setGradeQuantityDelivered(int gradeQuantityDelivered) {
+	public void setGradeQuantityDelivered(NotaValues gradeQuantityDelivered) {
 		this.gradeQuantityDelivered = gradeQuantityDelivered;
 	}
 
