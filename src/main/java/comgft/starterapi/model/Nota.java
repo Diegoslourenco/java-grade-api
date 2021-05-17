@@ -2,8 +2,6 @@ package comgft.starterapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 /**
  * Nota --- represents a Starter's grade in a Submissao for a Desafio.
@@ -32,13 +32,13 @@ public class Nota {
 	
 	@NotNull
 	@Column(name = "grade_code_quality")
-	@Enumerated(EnumType.ORDINAL)
-	private NotaValues gradeCodeQuality;
+	@Range(min = 1, max = 3)
+	private int gradeCodeQuality;
 	
 	@NotNull
 	@Column(name = "grade_quantity_delivered")
-	@Enumerated(EnumType.ORDINAL)
-	private NotaValues gradeQuantityDelivered;
+	@Range(min = 1, max = 3)
+	private int gradeQuantityDelivered;
 
 	public Long getId() {
 		return id;
@@ -56,19 +56,19 @@ public class Nota {
 		this.submissao = submissao;
 	}
 
-	public NotaValues getGradeCodeQuality() {
+	public int getGradeCodeQuality() {
 		return gradeCodeQuality;
 	}
 
-	public void setGradeCodeQuality(NotaValues gradeCodeQuality) {
+	public void setGradeCodeQuality(int gradeCodeQuality) {
 		this.gradeCodeQuality = gradeCodeQuality;
 	}
 
-	public NotaValues getGradeQuantityDelivered() {
+	public int getGradeQuantityDelivered() {
 		return gradeQuantityDelivered;
 	}
 
-	public void setGradeQuantityDelivered(NotaValues gradeQuantityDelivered) {
+	public void setGradeQuantityDelivered(int gradeQuantityDelivered) {
 		this.gradeQuantityDelivered = gradeQuantityDelivered;
 	}
 
