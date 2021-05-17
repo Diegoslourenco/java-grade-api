@@ -79,6 +79,28 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
+	
+	@ExceptionHandler({ StarterUsernameNotUniqueException.class })
+	public ResponseEntity<Object> handleStarterUsernameNotUniqueException(StarterUsernameNotUniqueException ex, WebRequest request) {
+		
+		String messageUser = messageSource.getMessage("starter.username-not-unique", null, LocaleContextHolder.getLocale());
+		String messageDeveloper = ex.toString();
+		
+		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		
+		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
+	@ExceptionHandler({ StarterEmailNotUniqueException.class })
+	public ResponseEntity<Object> handleStarterEmailNotUniqueException(StarterEmailNotUniqueException ex, WebRequest request) {
+		
+		String messageUser = messageSource.getMessage("starter.email-not-unique", null, LocaleContextHolder.getLocale());
+		String messageDeveloper = ex.toString();
+		
+		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		
+		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
 
 	private List<Error> createErrorsList(BindingResult bindingResult) {
 		List<Error> errors = new ArrayList<>();

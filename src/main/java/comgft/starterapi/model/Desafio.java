@@ -1,11 +1,17 @@
 package comgft.starterapi.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Desafio --- represents a code chalenge for a Starter.
@@ -14,6 +20,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "desafios")
+@JsonIgnoreProperties("submissoes")
 public class Desafio {
 	
 	@Id
@@ -22,6 +29,9 @@ public class Desafio {
 	
 	@NotNull
 	private String name;
+	
+	@OneToMany(mappedBy = "desafio", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Submissao> submissoes;
 
 	public Long getId() {
 		return id;
@@ -37,6 +47,14 @@ public class Desafio {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Submissao> getSubmissoes() {
+		return submissoes;
+	}
+
+	public void setSubmissoes(List<Submissao> submissoes) {
+		this.submissoes = submissoes;
 	}
 
 	@Override

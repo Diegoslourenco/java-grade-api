@@ -6,43 +6,35 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
- * Submissao --- represents a Starter's submission for a Desafio.
+ * Nota --- represents a Starter's grade in a Submissao for a Desafio.
  * @author    Diego da Silva Lourenco
  */
 
 @Entity
-@Table(name = "submissoes")
-@JsonIgnoreProperties("nota")
-public class Submissao {
+@Table(name = "notas")
+public class Nota {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "starter_id")
-	private Starter starter;
+	@OneToOne
+	@JoinColumn(name = "submissao_id")
+	private Submissao submissao;
 	
 	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "desafio_id")
-	private Desafio desafio;
+	@Column(name = "grade_code_quality")
+	private int gradeCodeQuality;
 	
 	@NotNull
-	@Column(name = "repository_url")
-	private String repositoryUrl;
-	
-	@OneToOne(mappedBy = "submissao", orphanRemoval = true)
-	private Nota nota;
+	@Column(name = "grade_quantity_delivered")
+	private int gradeQuantityDelivered;
 
 	public Long getId() {
 		return id;
@@ -52,28 +44,28 @@ public class Submissao {
 		this.id = id;
 	}
 
-	public Starter getStarter() {
-		return starter;
+	public Submissao getSubmissao() {
+		return submissao;
 	}
 
-	public void setStarter(Starter starter) {
-		this.starter = starter;
+	public void setSubmissao(Submissao submissao) {
+		this.submissao = submissao;
 	}
 
-	public Desafio getDesafio() {
-		return desafio;
+	public int getGradeCodeQuality() {
+		return gradeCodeQuality;
 	}
 
-	public void setDesafio(Desafio desafio) {
-		this.desafio = desafio;
+	public void setGradeCodeQuality(int gradeCodeQuality) {
+		this.gradeCodeQuality = gradeCodeQuality;
 	}
 
-	public String getRepositoryUrl() {
-		return repositoryUrl;
+	public int getGradeQuantityDelivered() {
+		return gradeQuantityDelivered;
 	}
 
-	public void setRepositoryUrl(String repositoryUrl) {
-		this.repositoryUrl = repositoryUrl;
+	public void setGradeQuantityDelivered(int gradeQuantityDelivered) {
+		this.gradeQuantityDelivered = gradeQuantityDelivered;
 	}
 
 	@Override
@@ -92,7 +84,7 @@ public class Submissao {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Submissao other = (Submissao) obj;
+		Nota other = (Nota) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
