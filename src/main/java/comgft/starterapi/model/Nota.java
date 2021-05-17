@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 /**
  * Nota --- represents a Starter's grade in a Submissao for a Desafio.
  * @author    Diego da Silva Lourenco
@@ -30,10 +32,12 @@ public class Nota {
 	
 	@NotNull
 	@Column(name = "grade_code_quality")
+	@Range(min = 1, max = 3)
 	private int gradeCodeQuality;
 	
 	@NotNull
 	@Column(name = "grade_quantity_delivered")
+	@Range(min = 1, max = 3)
 	private int gradeQuantityDelivered;
 
 	public Long getId() {
