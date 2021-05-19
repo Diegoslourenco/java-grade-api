@@ -1,5 +1,6 @@
 package comgft.starterapi.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +42,7 @@ public class Submissao {
 	@Column(name = "repository_url")
 	private String repositoryUrl;
 	
-	@OneToOne(mappedBy = "submissao", orphanRemoval = true)
+	@OneToOne(mappedBy = "submissao", cascade = CascadeType.REMOVE)
 	private Nota nota;
 
 	public Long getId() {
@@ -74,6 +75,14 @@ public class Submissao {
 
 	public void setRepositoryUrl(String repositoryUrl) {
 		this.repositoryUrl = repositoryUrl;
+	}
+
+	public Nota getNota() {
+		return nota;
+	}
+
+	public void setNota(Nota nota) {
+		this.nota = nota;
 	}
 
 	@Override

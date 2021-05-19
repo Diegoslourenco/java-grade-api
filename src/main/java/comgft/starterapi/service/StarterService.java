@@ -64,6 +64,14 @@ public class StarterService {
 
 	public Starter update(Long id, Starter starter) {
 		
+		if (!checkUniqueUsername(starter)) {
+			throw new StarterUsernameNotUniqueException();
+		}
+		
+		if (!checkUniqueEmail(starter)) {
+			throw new StarterEmailNotUniqueException();
+		}
+		
 		Starter starterSaved = getById(id);
 		
 		/* Pass the data from person that comes from client to personSaved that comes from database

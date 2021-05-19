@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +29,13 @@ public class SubmissaoResource {
 	private SubmissaoService submissaoService;
 	
 	@GetMapping
+	@PreAuthorize("hasRole('INSTRUTOR')")
 	public ResponseEntity<List<Submissao>> getAll() {
 		return new ResponseEntity<List<Submissao>>(submissaoService.getAll(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('INSTRUTOR')")
 	public ResponseEntity<Submissao> getById(@PathVariable Long id) {
 		return new ResponseEntity<Submissao>(submissaoService.getById(id), HttpStatus.OK);
 	}
@@ -43,12 +46,14 @@ public class SubmissaoResource {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('INSTRUTOR')")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		submissaoService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('INSTRUTOR')")
 	public ResponseEntity<Submissao> update(@PathVariable Long id, @Valid @RequestBody Submissao submissao) {			
 		return new ResponseEntity<Submissao>(submissaoService.update(id, submissao), HttpStatus.OK);
 	}
