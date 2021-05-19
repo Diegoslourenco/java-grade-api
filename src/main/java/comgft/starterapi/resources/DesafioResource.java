@@ -24,7 +24,7 @@ import comgft.starterapi.service.DesafioService;
 @RestController
 @RequestMapping("/desafios")
 @PreAuthorize("hasRole('INSTRUTOR')")
-public class DesafioResources {
+public class DesafioResource {
 	
 	@Autowired
 	DesafioService desafioService;
@@ -35,8 +35,8 @@ public class DesafioResources {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Desafio> getById(@PathVariable Long id) {
-		return new ResponseEntity<Desafio>(desafioService.getById(id), HttpStatus.OK);
+	public ResponseEntity<Desafio> getOne(@PathVariable Long id) {
+		return new ResponseEntity<Desafio>(desafioService.getOne(id), HttpStatus.OK);
 	}
 	
 	@PostMapping

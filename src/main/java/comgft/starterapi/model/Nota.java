@@ -11,6 +11,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.hateoas.RepresentationModel;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Nota --- represents a Starter's grade in a Submissao for a Desafio.
@@ -19,12 +22,13 @@ import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "notas")
-public class Nota {
+public class Nota extends RepresentationModel<Nota> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonIgnoreProperties("links")
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "submissao_id")
