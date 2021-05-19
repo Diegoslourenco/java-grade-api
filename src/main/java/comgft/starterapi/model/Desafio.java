@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -21,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "desafios")
 @JsonIgnoreProperties("submissoes")
-public class Desafio {
+public class Desafio extends RepresentationModel<Desafio> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

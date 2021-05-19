@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -16,6 +19,7 @@ import comgft.starterapi.exceptionhandler.StarterEmailNotUniqueException;
 import comgft.starterapi.exceptionhandler.StarterUsernameNotUniqueException;
 import comgft.starterapi.model.Starter;
 import comgft.starterapi.repository.StarterRepository;
+import comgft.starterapi.resources.StarterResource;
 
 @Service
 public class StarterService {
@@ -26,19 +30,12 @@ public class StarterService {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	public List<Starter> getAll() {
-		return starters.findAll();
+	public List<Starter> getAll() {	
+		return mapToResourceCollection(starters.findAll());
 	}
 	
-	public Starter getById(Long id) {
-		
-		Optional<Starter> starterSaved = starters.findById(id);
-		
-		if (starterSaved.isEmpty()) {
-			throw new EmptyResultDataAccessException(1);
-		}
-		
-		return starterSaved.get();
+	public Starter getOne(Long id) {
+		return mapToResource(getById(id));
 	}
 
 	public Starter save(Starter starter, HttpServletResponse response) {
@@ -55,7 +52,7 @@ public class StarterService {
 		
 		publisher.publishEvent(new ResourceCreatedEvent(this, response, starterSaved.getId()));
 		
-		return starterSaved;
+		return mapToResource(starterSaved);
 	}
 
 	public void delete(Long id) {
@@ -79,10 +76,10 @@ public class StarterService {
 		 */
 		BeanUtils.copyProperties(starter, starterSaved, "id");
 		
-		return starters.save(starterSaved);
+		return mapToResource(starters.save(starterSaved));
 	}
 	
-	public boolean checkUniqueEmail(Starter novoStarter) {
+	private boolean checkUniqueEmail(Starter novoStarter) {
 		List<Starter> allStarters = starters.findAll();
 		
 		for (Starter starter : allStarters) {
@@ -95,7 +92,7 @@ public class StarterService {
 		return true;	
 	}
 	
-	public boolean checkUniqueUsername(Starter novoStarter) {
+	private boolean checkUniqueUsername(Starter novoStarter) {
 		List<Starter> allStarters = starters.findAll();
 		
 		for (Starter starter : allStarters) {
@@ -106,6 +103,58 @@ public class StarterService {
 		}
 		
 		return true;	
+	}
+	
+	private Starter getById(Long id) {
+		
+		Optional<Starter> starterSaved = starters.findById(id);
+		
+		if (starterSaved.isEmpty()) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		
+		return starterSaved.get();
+	}
+	
+	private Starter mapToResource(Starter starter) {
+		
+		starter.add(linkTo(methodOn(StarterResource.class)
+				.getOne(starter.getId()))
+				.withSelfRel());
+		
+		starter.add(linkTo(methodOn(StarterResource.class)
+				.update(starter.getId(), starter))
+				.withRel("update"));
+		
+		starter.add(linkTo(methodOn(StarterResource.class)
+				.delete(starter.getId()))
+				.withRel("delete"));
+		
+		starter.add(linkTo(methodOn(StarterResource.class)
+				.getAll())
+				.withRel("Lista de Starters"));
+		
+		return starter;
+	}
+	
+	private List<Starter> mapToResourceCollection(List<Starter> allStarters) {
+		
+		for (Starter starter : allStarters) {
+			
+			starter.add(linkTo(methodOn(StarterResource.class)
+					.getOne(starter.getId()))
+					.withSelfRel());
+			
+			starter.add(linkTo(methodOn(StarterResource.class)
+					.update(starter.getId(), starter))
+					.withRel("update"));
+			
+			starter.add(linkTo(methodOn(StarterResource.class)
+					.delete(starter.getId()))
+					.withRel("delete"));
+		}	
+
+		return allStarters;
 	}
 
 }

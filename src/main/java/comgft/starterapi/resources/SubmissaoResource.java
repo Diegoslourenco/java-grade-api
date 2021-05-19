@@ -36,8 +36,8 @@ public class SubmissaoResource {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('INSTRUTOR')")
-	public ResponseEntity<Submissao> getById(@PathVariable Long id) {
-		return new ResponseEntity<Submissao>(submissaoService.getById(id), HttpStatus.OK);
+	public ResponseEntity<Submissao> getOne(@PathVariable Long id) {
+		return new ResponseEntity<Submissao>(submissaoService.getOne(id), HttpStatus.OK);
 	}
 	
 	@PostMapping

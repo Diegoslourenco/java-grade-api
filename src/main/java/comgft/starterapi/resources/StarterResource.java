@@ -24,7 +24,7 @@ import comgft.starterapi.service.StarterService;
 @RestController
 @RequestMapping("/starters")
 @PreAuthorize("hasRole('INSTRUTOR')")
-public class StarterResources {
+public class StarterResource {
 	
 	@Autowired
 	private StarterService starterService;
@@ -35,8 +35,8 @@ public class StarterResources {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Starter> getById(@PathVariable Long id) {
-		return new ResponseEntity<Starter>(starterService.getById(id), HttpStatus.OK);
+	public ResponseEntity<Starter> getOne(@PathVariable Long id) {
+		return new ResponseEntity<Starter>(starterService.getOne(id), HttpStatus.OK);
 	}
 	
 	@PostMapping

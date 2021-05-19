@@ -35,8 +35,8 @@ public class NotaResource {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Nota> getById(@PathVariable Long id) {
-		return new ResponseEntity<Nota>(notaService.getById(id), HttpStatus.OK);
+	public ResponseEntity<Nota> getOne(@PathVariable Long id) {
+		return new ResponseEntity<Nota>(notaService.getOne(id), HttpStatus.OK);
 	}
 	
 	@PostMapping

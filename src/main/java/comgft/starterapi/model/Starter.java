@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import comgft.starterapi.model.starter.Address;
@@ -26,7 +28,7 @@ import comgft.starterapi.model.starter.Language;
 @Entity
 @Table(name = "starters")
 @JsonIgnoreProperties({"submissoes"})
-public class Starter {
+public class Starter extends RepresentationModel<Starter> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
