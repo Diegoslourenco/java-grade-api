@@ -1,4 +1,4 @@
-package comgft.starterapi.model;
+package comgft.starterapi.model.starter;
 
 import javax.persistence.Column;
 

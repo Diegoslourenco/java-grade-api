@@ -15,6 +15,9 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import comgft.starterapi.model.starter.Address;
+import comgft.starterapi.model.starter.Language;
+
 /**
  * Starter --- represents a starter in the project Start.
  * @author    Diego da Silva Lourenco
@@ -50,7 +53,7 @@ public class Starter {
 	@Embedded
 	private Language language;
 	
-	@OneToMany(mappedBy = "starter", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "starter", cascade = CascadeType.ALL)
 	private List<Submissao> submissoes; 
 
 	public Long getId() {

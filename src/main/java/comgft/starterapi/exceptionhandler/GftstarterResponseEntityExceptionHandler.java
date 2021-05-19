@@ -101,6 +101,17 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
+	
+	@ExceptionHandler({ SubmissaoNotUniqueException.class })
+	public ResponseEntity<Object> handleSubmissaoNotUniqueException(SubmissaoNotUniqueException ex, WebRequest request) {
+		
+		String messageUser = messageSource.getMessage("submissao.not-unique", null, LocaleContextHolder.getLocale());
+		String messageDeveloper = ex.toString();
+		
+		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		
+		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
 
 	private List<Error> createErrorsList(BindingResult bindingResult) {
 		List<Error> errors = new ArrayList<>();
