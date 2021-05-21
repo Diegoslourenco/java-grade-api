@@ -20,36 +20,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Nota;
 import comgft.starterapi.service.NotaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/notas")
 @PreAuthorize("hasRole('INSTRUTOR')")
+@Api(tags =  {"notas"})
 public class NotaResource {
 	
 	@Autowired
 	private NotaService notaService;
 	
+	@ApiOperation(value="Retorna uma lista de notas")
 	@GetMapping
 	public ResponseEntity<List<Nota>> getAll() {
 		return new ResponseEntity<List<Nota>>(notaService.getAll(), HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retorna uma nota única")
 	@GetMapping("/{id}")
 	public ResponseEntity<Nota> getOne(@PathVariable Long id) {
 		return new ResponseEntity<Nota>(notaService.getOne(id), HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Cria uma nota")
 	@PostMapping
 	public ResponseEntity<Nota> create(@Valid @RequestBody Nota nota, HttpServletResponse response) {
 		return new ResponseEntity<Nota>(notaService.save(nota, response), HttpStatus.CREATED);
 	}
 	
+	@ApiOperation(value="Deleta uma nota")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		notaService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiOperation(value="Atualiza uma nota")
 	@PutMapping("/{id}")
 	public ResponseEntity<Nota> update(@PathVariable Long id, @Valid @RequestBody Nota nota) {			
 		return new ResponseEntity<Nota>(notaService.update(id, nota), HttpStatus.OK);
