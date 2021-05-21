@@ -7,20 +7,20 @@ package comgft.starterapi.exceptionhandler;
 
 public class Error {
 	
-	private String messageUser;
-	private String messageDeveloper;
+	private String message;
+	private String description;
 		
-	public Error(String messageUser, String messageDeveloper) {
-		this.messageUser = messageUser;
-		this.messageDeveloper = messageDeveloper;
+	public Error(String message, String description) {
+		this.message = message;
+		this.description = description;
 	}
 
-	public String getMessageUser() {
-		return messageUser;
+	public String getMessage() {
+		return message;
 	}
 	
-	public String getMessageDeveloper() {
-		return messageDeveloper;
+	public String getDescription() {
+		return description;
 	}	
 	
 }

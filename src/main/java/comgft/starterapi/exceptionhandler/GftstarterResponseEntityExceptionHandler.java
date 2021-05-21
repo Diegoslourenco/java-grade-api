@@ -33,17 +33,17 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		String messageUser = messageSource.getMessage("message.invalid", null, LocaleContextHolder.getLocale());
-		String messageDeveloper;
+		String message = messageSource.getMessage("message.invalid", null, LocaleContextHolder.getLocale());
+		String description;
 		
 		if (ex.getCause() == null) {
-			messageDeveloper = ex.toString();
+			description = ex.toString();
 		}
 		else {
-			messageDeveloper = ex.getCause().toString();
+			description = ex.getCause().toString();
 		}
 		
-		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		List<Error> errors = Arrays.asList(new Error(message, description));
 		
 		return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
 	}
@@ -61,10 +61,10 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
 	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 		
-		String messageUser = messageSource.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
-		String messageDeveloper = ex.toString();
+		String message = messageSource.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
 		
-		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		List<Error> errors = Arrays.asList(new Error(message, description));
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
@@ -72,10 +72,10 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	@ExceptionHandler({ DataIntegrityViolationException.class })
 	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
 		
-		String messageUser = messageSource.getMessage("resource.not-permitted-operation", null, LocaleContextHolder.getLocale());
-		String messageDeveloper = ExceptionUtils.getRootCauseMessage(ex);
+		String message = messageSource.getMessage("resource.not-permitted-operation", null, LocaleContextHolder.getLocale());
+		String description = ExceptionUtils.getRootCauseMessage(ex);
 		
-		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		List<Error> errors = Arrays.asList(new Error(message, description));
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
@@ -83,10 +83,10 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	@ExceptionHandler({ StarterUsernameNotUniqueException.class })
 	public ResponseEntity<Object> handleStarterUsernameNotUniqueException(StarterUsernameNotUniqueException ex, WebRequest request) {
 		
-		String messageUser = messageSource.getMessage("starter.username-not-unique", null, LocaleContextHolder.getLocale());
-		String messageDeveloper = ex.toString();
+		String message = messageSource.getMessage("starter.username-not-unique", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
 		
-		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		List<Error> errors = Arrays.asList(new Error(message, description));
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
@@ -94,10 +94,10 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	@ExceptionHandler({ StarterEmailNotUniqueException.class })
 	public ResponseEntity<Object> handleStarterEmailNotUniqueException(StarterEmailNotUniqueException ex, WebRequest request) {
 		
-		String messageUser = messageSource.getMessage("starter.email-not-unique", null, LocaleContextHolder.getLocale());
-		String messageDeveloper = ex.toString();
+		String message = messageSource.getMessage("starter.email-not-unique", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
 		
-		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		List<Error> errors = Arrays.asList(new Error(message, description));
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
@@ -105,10 +105,10 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	@ExceptionHandler({ SubmissaoNotUniqueException.class })
 	public ResponseEntity<Object> handleSubmissaoNotUniqueException(SubmissaoNotUniqueException ex, WebRequest request) {
 		
-		String messageUser = messageSource.getMessage("submissao.not-unique", null, LocaleContextHolder.getLocale());
-		String messageDeveloper = ex.toString();
+		String message = messageSource.getMessage("submissao.not-unique", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
 		
-		List<Error> errors = Arrays.asList(new Error(messageUser, messageDeveloper));
+		List<Error> errors = Arrays.asList(new Error(message, description));
 		
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
@@ -118,10 +118,10 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 		
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
 			
-			String messageUser = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-			String messageDeveloper = fieldError.toString();
+			String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+			String description = fieldError.toString();
 			
-			errors.add(new Error(messageUser, messageDeveloper));
+			errors.add(new Error(message, description));
 		}
 	
 		return errors;

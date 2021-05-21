@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import comgft.starterapi.model.auth.LoginRequest;
 import comgft.starterapi.model.auth.TokenJwt;
 import comgft.starterapi.service.TokenService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 
 @RestController
 @RequestMapping("/auth")
+@Api(tags =  {"autenticação"})
 public class AuthController {
 	
 	@Autowired
@@ -27,6 +30,8 @@ public class AuthController {
 	@Autowired
 	private TokenService tokenService;
 	
+	@ApiOperation(value="Autenticação do usuário", 
+				  notes = "Recebe username e password e retorna um token que deve ser usado para acessar as funcionalidades da API")
 	@PostMapping
 	public ResponseEntity<TokenJwt> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 		

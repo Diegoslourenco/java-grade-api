@@ -20,36 +20,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Desafio;
 import comgft.starterapi.service.DesafioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/desafios")
 @PreAuthorize("hasRole('INSTRUTOR')")
+@Api(tags =  {"desafios"})
 public class DesafioResource {
 	
 	@Autowired
 	DesafioService desafioService;
 	
+	@ApiOperation(value="Retorna uma lista de desafios")
 	@GetMapping
 	public ResponseEntity<List<Desafio>> getAll() {
 		return new ResponseEntity<List<Desafio>>(desafioService.getAll(), HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retorna um desafio único")
 	@GetMapping("/{id}")
 	public ResponseEntity<Desafio> getOne(@PathVariable Long id) {
 		return new ResponseEntity<Desafio>(desafioService.getOne(id), HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Cria um desafio")
 	@PostMapping
 	public ResponseEntity<Desafio> create(@Valid @RequestBody Desafio desafio, HttpServletResponse response) {
 		return new ResponseEntity<Desafio>(desafioService.save(desafio, response), HttpStatus.CREATED);
 	}
 	
+	@ApiOperation(value="Deleta um desafio")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		desafioService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiOperation(value="Atualiza um desafio")
 	@PutMapping("/{id}")
 	public ResponseEntity<Desafio> update(@PathVariable Long id, @Valid @RequestBody Desafio desafio) {			
 		return new ResponseEntity<Desafio>(desafioService.update(id, desafio), HttpStatus.OK);
