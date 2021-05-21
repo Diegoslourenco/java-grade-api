@@ -16,17 +16,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Starter;
 import comgft.starterapi.service.StarterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/starters")
 @PreAuthorize("hasRole('INSTRUTOR')")
 @Api(tags =  {"starters"})
+@ApiResponses(value = {
+		@ApiResponse(code = 400, message = "Bad Request"),
+		@ApiResponse(code = 401, message = "Unauthorized"),
+		@ApiResponse(code = 404, message = "Resource not found")
+})
 public class StarterResource {
 	
 	@Autowired
@@ -45,12 +53,14 @@ public class StarterResource {
 	}
 	
 	@ApiOperation(value="Cria um starter")
+	@ResponseStatus(value = HttpStatus.CREATED) // swagger library can get the 201 code instead of the 200 default one
 	@PostMapping
 	public ResponseEntity<Starter> create(@Valid @RequestBody Starter starter, HttpServletResponse response) {
 		return new ResponseEntity<Starter>(starterService.save(starter, response), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value="Deleta um starter")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT) // swagger library can get the 204 code instead of the 200 default one
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		starterService.delete(id);
