@@ -22,6 +22,28 @@
 							"port": "8080",
 							"path": [
 								"starters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "paulo",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "paop",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "paulo.oliveira@gft.com",
+									"disabled": true
+								},
+								{
+									"key": "language",
+									"value": "java",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -143,6 +165,13 @@
 							"port": "8080",
 							"path": [
 								"desafios"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "mvc",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -385,6 +414,18 @@
 							"port": "8080",
 							"path": [
 								"notas"
+							],
+							"query": [
+								{
+									"key": "gradeCodeQuality",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "gradeQuantityDelivered",
+									"value": "2",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -556,7 +597,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb2RuIiwiaWF0IjoxNjIxNDY1NTc3LCJleHAiOjE2MjE1NTE5Nzd9.5vTcObrB_vM2yHWdkXW8K7F18UQ55lCxts4Z-rIu1xY",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpbnN0cnV0b3IiLCJpYXQiOjE2MjE3MTAzMDYsImV4cCI6MTYyMTc5NjcwNn0.vkxg_SU6BnwJXJbmIVNVx1Fek07XvDWYStLqRlCe-XQ",
 				"type": "string"
 			}
 		]
