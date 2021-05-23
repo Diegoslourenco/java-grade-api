@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Starter;
+import comgft.starterapi.repository.filter.StarterFilter;
 import comgft.starterapi.service.StarterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,8 +43,8 @@ public class StarterResource {
 	
 	@ApiOperation(value="Retorna uma lista de starters")
 	@GetMapping
-	public ResponseEntity<List<Starter>> getAll() {
-		return new ResponseEntity<List<Starter>>(starterService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Starter>> search(StarterFilter filter) {
+		return new ResponseEntity<List<Starter>>(starterService.search(filter), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="Retorna um starter único")

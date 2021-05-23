@@ -1,12 +1,12 @@
 package comgft.starterapi.service;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import comgft.starterapi.exceptionhandler.StarterEmailNotUniqueException;
 import comgft.starterapi.exceptionhandler.StarterUsernameNotUniqueException;
 import comgft.starterapi.model.Starter;
 import comgft.starterapi.repository.StarterRepository;
+import comgft.starterapi.repository.filter.StarterFilter;
 import comgft.starterapi.resources.StarterResource;
 
 @Service
@@ -30,8 +31,8 @@ public class StarterService {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	public List<Starter> getAll() {	
-		return mapToResourceCollection(starters.findAll());
+	public List<Starter> search(StarterFilter filter) {	
+		return mapToResourceCollection(starters.filter(filter));
 	}
 	
 	public Starter getOne(Long id) {
@@ -71,7 +72,7 @@ public class StarterService {
 		
 		Starter starterSaved = getById(id);
 		
-		/* Pass the data from person that comes from client to personSaved that comes from database
+		/* Pass the data from starter that comes from client to starterSaved that comes from database
 		 * ignoring the id that is the same in the url
 		 */
 		BeanUtils.copyProperties(starter, starterSaved, "id");
@@ -131,7 +132,7 @@ public class StarterService {
 				.withRel("delete"));
 		
 		starter.add(linkTo(methodOn(StarterResource.class)
-				.getAll())
+				.search(null))
 				.withRel("Lista de Starters"));
 		
 		return starter;

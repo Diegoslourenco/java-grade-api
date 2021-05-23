@@ -19,6 +19,7 @@ import comgft.starterapi.exceptionhandler.SubmissaoNotUniqueException;
 import comgft.starterapi.model.Nota;
 import comgft.starterapi.model.Submissao;
 import comgft.starterapi.repository.NotaRepository;
+import comgft.starterapi.repository.filter.NotaFilter;
 import comgft.starterapi.resources.NotaResource;
 
 @Service
@@ -30,8 +31,8 @@ public class NotaService {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	public List<Nota> getAll() {
-		return mapToResourceCollection(notas.findAll());
+	public List<Nota> search(NotaFilter filter) {
+		return mapToResourceCollection(notas.filter(filter));
 	}
 	
 	public Nota getOne(Long id) {
@@ -63,9 +64,6 @@ public class NotaService {
 		
 		Nota notaSaved = getById(id);
 		
-		/* Pass the data from person that comes from client to personSaved that comes from database
-		 * ignoring the id that is the same in the url
-		 */
 		BeanUtils.copyProperties(nota, notaSaved, "id");
 		
 		return mapToResource(notas.save(notaSaved));
@@ -110,7 +108,7 @@ public class NotaService {
 				.withRel("delete"));
 		
 		nota.add(linkTo(methodOn(NotaResource.class)
-				.getAll())
+				.search(null))
 				.withRel("Lista de Notas"));
 		
 		return nota;

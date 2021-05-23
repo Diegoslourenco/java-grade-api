@@ -1,4 +1,4 @@
-package comgft.starterapi.model.starter;
+package comgft.starterapi.model;
 
 import javax.persistence.Embeddable;
 

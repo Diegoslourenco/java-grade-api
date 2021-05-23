@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Desafio;
+import comgft.starterapi.repository.filter.DesafioFilter;
 import comgft.starterapi.service.DesafioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,8 +43,8 @@ public class DesafioResource {
 	
 	@ApiOperation(value="Retorna uma lista de desafios")	
 	@GetMapping
-	public ResponseEntity<List<Desafio>> getAll() {
-		return new ResponseEntity<List<Desafio>>(desafioService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Desafio>> search(DesafioFilter filter) {
+		return new ResponseEntity<List<Desafio>>(desafioService.search(filter), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="Retorna um desafio único")

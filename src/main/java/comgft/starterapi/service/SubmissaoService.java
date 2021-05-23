@@ -52,10 +52,7 @@ public class SubmissaoService {
 	public Submissao update(Long id, Submissao submissao) {
 		
 		Submissao submissaoSaved = getById(id);
-		
-		/* Pass the data from person that comes from client to personSaved that comes from database
-		 * ignoring the id that is the same in the url
-		 */
+
 		BeanUtils.copyProperties(submissao, submissaoSaved, "id");
 		
 		return mapToResource(submissoes.save(submissaoSaved));

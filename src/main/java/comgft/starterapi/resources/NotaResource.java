@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Nota;
+import comgft.starterapi.repository.filter.NotaFilter;
 import comgft.starterapi.service.NotaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,8 +43,8 @@ public class NotaResource {
 	
 	@ApiOperation(value="Retorna uma lista de notas")
 	@GetMapping
-	public ResponseEntity<List<Nota>> getAll() {
-		return new ResponseEntity<List<Nota>>(notaService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Nota>> search(NotaFilter filter) {
+		return new ResponseEntity<List<Nota>>(notaService.search(filter), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="Retorna uma nota única")

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import comgft.starterapi.event.ResourceCreatedEvent;
 import comgft.starterapi.model.Desafio;
 import comgft.starterapi.repository.DesafioRepository;
+import comgft.starterapi.repository.filter.DesafioFilter;
 import comgft.starterapi.resources.DesafioResource;
 
 @Service
@@ -28,8 +29,8 @@ public class DesafioService {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	public List<Desafio> getAll() {
-		return mapToResourceCollection(desafios.findAll());
+	public List<Desafio> search(DesafioFilter filter) {
+		return mapToResourceCollection(desafios.filter(filter));
 	}
 	
 	public Desafio getOne(Long id) {
@@ -84,7 +85,7 @@ public class DesafioService {
 				.withRel("delete"));
 		
 		desafio.add(linkTo(methodOn(DesafioResource.class)
-				.getAll())
+				.search(null))
 				.withRel("Lista de Desafios"));
 		
 		return desafio;
