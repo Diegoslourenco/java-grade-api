@@ -80,8 +80,7 @@
 		<dependency>
 	  		<groupId>org.springframework.boot</groupId>
 	  		<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		
+		</dependency>	
 	
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -112,6 +111,11 @@
 			<version>2.9.2</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-jpamodelgen</artifactId>
+		</dependency>
+	    
 	</dependencies>
 
 	<build>
@@ -119,6 +123,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+					<generatedSourcesDirectory>src/main/java</generatedSourcesDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

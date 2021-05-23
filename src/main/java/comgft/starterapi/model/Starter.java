@@ -17,8 +17,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import comgft.starterapi.model.starter.Address;
-import comgft.starterapi.model.starter.Language;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Starter --- represents a starter in the project Start.
@@ -52,9 +51,9 @@ public class Starter extends RepresentationModel<Starter> {
 	private Address address;
 	
 	@NotNull
-	@Embedded
-	private Language language;
+	private String language;
 	
+	@ApiModelProperty(hidden = true)
 	@OneToMany(mappedBy = "starter", cascade = CascadeType.ALL)
 	private List<Submissao> submissoes; 
 
@@ -106,11 +105,11 @@ public class Starter extends RepresentationModel<Starter> {
 		this.address = address;
 	}
 
-	public Language getLanguage() {
+	public String getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(Language language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 

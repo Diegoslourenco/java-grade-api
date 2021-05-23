@@ -41,6 +41,7 @@ public class SwaggerConfig {
 		           	
 				 	.apiInfo(metaInfo())
 		            .pathMapping("/")
+		            .useDefaultResponseMessages(false)
 		            .select()
 		            .apis(RequestHandlerSelectors.basePackage("comgft.starterapi"))
 		            .build()

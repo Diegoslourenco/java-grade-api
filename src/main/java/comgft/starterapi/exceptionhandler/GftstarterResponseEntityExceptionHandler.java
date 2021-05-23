@@ -23,8 +23,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-	
+public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {	
 	
 	@Autowired
 	private MessageSource messageSource;
@@ -106,6 +105,17 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 	public ResponseEntity<Object> handleSubmissaoNotUniqueException(SubmissaoNotUniqueException ex, WebRequest request) {
 		
 		String message = messageSource.getMessage("submissao.not-unique", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
+		
+		List<Error> errors = Arrays.asList(new Error(message, description));
+		
+		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
+	@ExceptionHandler({AuthException.class })
+	public ResponseEntity<Object> handleAuthException(AuthException ex, WebRequest request) {
+		
+		String message = messageSource.getMessage("auth.user-or-password-incorrect", null, LocaleContextHolder.getLocale());
 		String description = ex.toString();
 		
 		List<Error> errors = Arrays.asList(new Error(message, description));

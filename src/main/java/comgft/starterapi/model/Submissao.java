@@ -16,6 +16,8 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Submissao --- represents a Starter's submission for a Desafio.
  * @author    Diego da Silva Lourenco
@@ -46,6 +48,7 @@ public class Submissao extends RepresentationModel<Submissao> {
 	@Column(name = "repository_url")
 	private String repositoryUrl;
 	
+	@ApiModelProperty(hidden = true)
 	@OneToOne(mappedBy = "submissao", cascade = CascadeType.REMOVE)
 	private Nota nota;
 

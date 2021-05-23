@@ -15,6 +15,8 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Desafio --- represents a code chalenge for a Starter.
  * @author    Diego da Silva Lourenco
@@ -32,13 +34,14 @@ public class Desafio extends RepresentationModel<Desafio> {
 	@NotNull
 	private String name;
 	
+	@ApiModelProperty(hidden = true)
 	@OneToMany(mappedBy = "desafio", cascade = CascadeType.ALL)
 	private List<Submissao> submissoes;
 
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}

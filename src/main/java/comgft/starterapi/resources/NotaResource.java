@@ -16,17 +16,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import comgft.starterapi.model.Nota;
+import comgft.starterapi.repository.filter.NotaFilter;
 import comgft.starterapi.service.NotaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/notas")
 @PreAuthorize("hasRole('INSTRUTOR')")
 @Api(tags =  {"notas"})
+@ApiResponses(value = {
+		@ApiResponse(code = 400, message = "Bad Request"),
+		@ApiResponse(code = 401, message = "Unauthorized"),
+		@ApiResponse(code = 404, message = "Resource not found")
+})
 public class NotaResource {
 	
 	@Autowired
@@ -34,8 +43,8 @@ public class NotaResource {
 	
 	@ApiOperation(value="Retorna uma lista de notas")
 	@GetMapping
-	public ResponseEntity<List<Nota>> getAll() {
-		return new ResponseEntity<List<Nota>>(notaService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Nota>> search(NotaFilter filter) {
+		return new ResponseEntity<List<Nota>>(notaService.search(filter), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="Retorna uma nota única")
@@ -45,12 +54,14 @@ public class NotaResource {
 	}
 	
 	@ApiOperation(value="Cria uma nota")
+	@ResponseStatus(value = HttpStatus.CREATED) // swagger library can get the 201 code instead of the 200 default one
 	@PostMapping
 	public ResponseEntity<Nota> create(@Valid @RequestBody Nota nota, HttpServletResponse response) {
 		return new ResponseEntity<Nota>(notaService.save(nota, response), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value="Deleta uma nota")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT) // swagger library can get the 204 code instead of the 200 default one
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		notaService.delete(id);

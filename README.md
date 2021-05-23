@@ -10,14 +10,18 @@ Application built in order to practice and apply the REST architetural concepts.
 - [flyway](https://flywaydb.org/)
 - [JWT - JSON Web Token 0.9.1](https://www.jsonwebtoken.io/)
 
+## Documentation
+
+The documentation was made using swagger and can be access at:
+
+http://localhost:8080/swagger-ui.html
+
 ## Internal Architecture
 The internal architecture:
 
   * `Resources` classes provide endpoints and deal with HTTP requests and responses from/to the client in JSON format
   * `Service` 	classes contains the business rules, receive the request from a controller and talk to repository to acess data to return a response to controller
   * `Repository` classes interface with the DAO internally that interface with the database and take care of writing and reading data to/from persistent storage
-
-
 
 ```
                       ┌───────────────────── Spring Service ──────────────────────┐
@@ -29,3 +33,6 @@ The internal architecture:
                       │                                                           │
                       └───────────────────────────────────────────────────────────┘
   ```  
+  
+ 
+  
