@@ -15,6 +15,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import comgft.starterapi.event.ResourceCreatedEvent;
+import comgft.starterapi.exceptionhandler.SubmissaoNotEqualException;
 import comgft.starterapi.exceptionhandler.SubmissaoNotUniqueException;
 import comgft.starterapi.model.Nota;
 import comgft.starterapi.model.Submissao;
@@ -58,11 +59,11 @@ public class NotaService {
 
 	public Nota update(Long id, Nota nota) {
 		
-		if (!checkUniqueSubmissao(nota.getSubmissao())) {
-			throw new SubmissaoNotUniqueException();
-		}
-		
 		Nota notaSaved = getById(id);
+		
+		if (!notaSaved.getSubmissao().equals(nota.getSubmissao())) {
+			throw new SubmissaoNotEqualException();
+		}
 		
 		BeanUtils.copyProperties(nota, notaSaved, "id");
 		

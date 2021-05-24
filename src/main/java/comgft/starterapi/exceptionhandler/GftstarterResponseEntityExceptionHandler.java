@@ -112,10 +112,32 @@ public class GftstarterResponseEntityExceptionHandler extends ResponseEntityExce
 		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 	
-	@ExceptionHandler({AuthException.class })
+	@ExceptionHandler({ AuthException.class })
 	public ResponseEntity<Object> handleAuthException(AuthException ex, WebRequest request) {
 		
 		String message = messageSource.getMessage("auth.user-or-password-incorrect", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
+		
+		List<Error> errors = Arrays.asList(new Error(message, description));
+		
+		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
+	@ExceptionHandler({ GradeNotNumberException.class })
+	public ResponseEntity<Object> handleGradeNotNumberException(GradeNotNumberException ex, WebRequest request) {
+		
+		String message = messageSource.getMessage("nota.grade-not-number", null, LocaleContextHolder.getLocale());
+		String description = ex.toString();
+		
+		List<Error> errors = Arrays.asList(new Error(message, description));
+		
+		return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
+	@ExceptionHandler({ SubmissaoNotEqualException.class })
+	public ResponseEntity<Object> handleSubmissaoNotEqualException(SubmissaoNotEqualException ex, WebRequest request) {
+		
+		String message = messageSource.getMessage("nota.submission-not-equal", null, LocaleContextHolder.getLocale());
 		String description = ex.toString();
 		
 		List<Error> errors = Arrays.asList(new Error(message, description));
