@@ -1,6 +1,5 @@
 package comgft.starterapi.config;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,9 +35,7 @@ public class SwaggerConfig {
 
 	 @Bean
 	 public Docket api() {
-		 return new Docket(DocumentationType.SWAGGER_2)
-				 	//.ignoredParameterTypes(YourClass.class,YourAnother.class)
-		           	
+		 return new Docket(DocumentationType.SWAGGER_2)	           	
 				 	.apiInfo(metaInfo())
 		            .pathMapping("/")
 		            .useDefaultResponseMessages(false)
@@ -47,10 +44,8 @@ public class SwaggerConfig {
 		            .build()
 		            .forCodeGeneration(true)
 		            .genericModelSubstitutes(ResponseEntity.class)
-		            .ignoredParameterTypes(Pageable.class)
 		            .securityContexts(Lists.newArrayList(securityContext()))
-		            .securitySchemes(Lists.newArrayList(apiKey()))
-		            .useDefaultResponseMessages(false);
+		            .securitySchemes(Lists.newArrayList(apiKey()));
 	}
 	 
 	  @Bean

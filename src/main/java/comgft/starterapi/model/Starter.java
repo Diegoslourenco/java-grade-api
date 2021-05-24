@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -33,24 +34,24 @@ public class Starter extends RepresentationModel<Starter> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotBlank
 	private String name;
 	
-	@NotNull
+	@NotBlank
 	private String email;
 	
 	@NotNull
 	@Size(min = 4, max = 4)
 	private String username;
 	
-	@NotNull
+	@NotBlank
 	@Size(min = 11, max = 11)
 	private String phone;
 	
 	@Embedded
 	private Address address;
 	
-	@NotNull
+	@NotBlank
 	private String language;
 	
 	@ApiModelProperty(hidden = true)

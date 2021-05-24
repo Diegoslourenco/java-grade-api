@@ -1,5 +1,10 @@
 package comgft.starterapi.model.auth;
 
+/**
+ * TokenJwt --- represents a JSON Web Token that corresponds to an authenticated client.
+ * @author    Diego da Silva Lourenco
+ */
+
 public class TokenJwt {
 	
 	private String token;

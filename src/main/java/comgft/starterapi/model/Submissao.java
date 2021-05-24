@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.hateoas.RepresentationModel;
@@ -44,7 +45,7 @@ public class Submissao extends RepresentationModel<Submissao> {
 	@JoinColumn(name = "desafio_id")
 	private Desafio desafio;
 	
-	@NotNull
+	@NotBlank
 	@Column(name = "repository_url")
 	private String repositoryUrl;
 	

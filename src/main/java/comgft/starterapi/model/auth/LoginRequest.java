@@ -2,6 +2,11 @@ package comgft.starterapi.model.auth;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+/**
+ * LoginRequest --- represents a login request from a client.
+ * @author    Diego da Silva Lourenco
+ */
+
 public class LoginRequest {
 	
 	private String username;

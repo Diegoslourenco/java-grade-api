@@ -2,9 +2,71 @@
 	"info": {
 		"_postman_id": "06976e06-e271-4c0b-af86-765c3d09bab9",
 		"name": "starter_dodn",
+		"description": "API RESTful de cadastro de starters, desafios, submissões e notas.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Login Starter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"dodn\",\r\n    \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Instrutor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"instrutor\",\r\n    \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "starters",
 			"item": [
@@ -22,6 +84,28 @@
 							"port": "8080",
 							"path": [
 								"starters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "paulo",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "pooa",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "paulo.oliveira@gft.com",
+									"disabled": true
+								},
+								{
+									"key": "language",
+									"value": "java",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -54,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Paulo Oliveira\",\r\n    \"email\": \"paulo.oliveira@gft.com\",\r\n    \"username\": \"pooa\",\r\n    \"phone\": \"15999999997\",\r\n    \"address\": {\r\n        \"street\": \"Avenida André Marques\",\r\n        \"number\": \"15\",\r\n        \"complement\": null,\r\n        \"district\": \"Jardim Três Meninos\",\r\n        \"cep\": \"36985214\",\r\n        \"city\": \"Cariacica\",\r\n        \"state\": \"ES\"\r\n    },\r\n    \"language\": {\r\n        \"languageName\": \"dotnet\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"Diego Lourenço\",\r\n    \"email\": \"diego.lourenco@gft.com\",\r\n    \"username\": \"dodn\",\r\n    \"phone\": \"15999999997\",\r\n    \"address\": {\r\n        \"street\": \"Avenida André Marques\",\r\n        \"number\": \"15\",\r\n        \"complement\": null,\r\n        \"district\": \"Jardim Três Meninos\",\r\n        \"cep\": \"36985214\",\r\n        \"city\": \"Cariacica\",\r\n        \"state\": \"ES\"\r\n    },\r\n    \"language\": \"java\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -143,6 +227,13 @@
 							"port": "8080",
 							"path": [
 								"desafios"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "mvc",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -385,6 +476,18 @@
 							"port": "8080",
 							"path": [
 								"notas"
+							],
+							"query": [
+								{
+									"key": "gradeCodeQuality",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "gradeQuantityDelivered",
+									"value": "2",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -488,67 +591,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "auth",
-			"item": [
-				{
-					"name": "Login Starter",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\" : \"dodn\",\r\n    \"password\" : \"123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/auth",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login Instrutor",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\" : \"instrutor\",\r\n    \"password\" : \"123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/auth",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth"
-							]
-						}
-					},
-					"response": []
-				}
-			]
 		}
 	],
 	"auth": {
@@ -556,7 +598,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb2RuIiwiaWF0IjoxNjIxNDY1NTc3LCJleHAiOjE2MjE1NTE5Nzd9.5vTcObrB_vM2yHWdkXW8K7F18UQ55lCxts4Z-rIu1xY",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpbnN0cnV0b3IiLCJpYXQiOjE2MjE4NTg3NzEsImV4cCI6MTYyMTk0NTE3MX0.TpivO_k-YOz1Eo1rYVAeJolAeNcrWTvv9lUEBO7iN-c",
 				"type": "string"
 			}
 		]

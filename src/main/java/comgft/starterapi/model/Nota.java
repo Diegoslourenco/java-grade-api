@@ -16,7 +16,7 @@ import org.springframework.hateoas.RepresentationModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Nota --- represents a Starter's grade in a Submissao for a Desafio.
+ * Nota --- represents the Starter's grades in a Submissao for a Desafio.
  * @author    Diego da Silva Lourenco
  */
 

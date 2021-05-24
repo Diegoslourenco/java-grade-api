@@ -7,23 +7,23 @@ package comgft.starterapi.repository.filter;
 
 public class NotaFilter {
 	
-	private int gradeCodeQuality;
+	private String gradeCodeQuality;
 	
-	private int gradeQuantityDelivered;
+	private String gradeQuantityDelivered;
 
-	public int getGradeCodeQuality() {
+	public String getGradeCodeQuality() {
 		return gradeCodeQuality;
 	}
 
-	public void setGradeCodeQuality(int gradeCodeQuality) {
+	public void setGradeCodeQuality(String gradeCodeQuality) {
 		this.gradeCodeQuality = gradeCodeQuality;
 	}
 
-	public int getGradeQuantityDelivered() {
+	public String getGradeQuantityDelivered() {
 		return gradeQuantityDelivered;
 	}
 
-	public void setGradeQuantityDelivered(int gradeQuantityDelivered) {
+	public void setGradeQuantityDelivered(String gradeQuantityDelivered) {
 		this.gradeQuantityDelivered = gradeQuantityDelivered;
 	}
 

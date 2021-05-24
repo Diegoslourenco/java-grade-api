@@ -12,9 +12,10 @@ Application built in order to practice and apply the REST architetural concepts.
 
 ## Documentation
 
-The documentation was made using swagger and can be access at:
+There is a Postman Collection inside the folder postman_collection.
+Also, it can be accessed online [here](https://documenter.getpostman.com/view/13054024/TzXumzAB).
 
-http://localhost:8080/swagger-ui.html
+Besides, a documentation was made using **Swagger** and can be accessed while running the project locally [here](http://localhost:8080/swagger-ui.html).
 
 ## Internal Architecture
 The internal architecture:
@@ -33,6 +34,3 @@ The internal architecture:
                       │                                                           │
                       └───────────────────────────────────────────────────────────┘
   ```  
-  
- 
-  
